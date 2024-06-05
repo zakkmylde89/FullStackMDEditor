@@ -55,6 +55,7 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
 
 1. Open '.vscode' folder and open 'settings.json' folder
 2. Remove current settings and insert:
+
     <code>
     {<br>
     "editor.codeActionsOnSave": {<br>
@@ -69,14 +70,17 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
         }<br>
     }
     </code>
+
 ## ESLint Config
 
 1. Open 'eslintrc.cjs' file and add:
 
-    rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/no-unused-vars': 'off'
+    <code>
+    rules: {<br>
+        '@typescript-eslint/explicit-function-return-type': 'off',<br>
+        '@typescript-eslint/no-unused-vars': 'off'<br>
     }
+    </code>
 
 ## Main Process Config
 
@@ -307,3 +311,30 @@ Then we will go to our terminal and run the command:
     yarn run dev
 
 If everything has been done correctly a window will open with our program and we'll see our "Hello From Electron" message on the front page.
+
+## Styling Our Window
+
+In our 'src/main/index.ts' file we go into our createWindow() function and adding space to line 14 we will add:
+
+    center: true,
+    title: 'NoteMark',
+    frame: false,
+    vibrancy: 'under-window',
+    visualEffectState: 'active',
+    titleBarStyle: 'hidden',
+    titleBarOverlay: 'true',                            // Windows only effect
+    trafficLightPosition: { x: 15, y: 10},              // MacOS only effect
+
+Both 'titleBarOverlay' and 'trafficLightPosition' are OS specific operations. We can also style our titleBarOverlay buttons if we'd like. Personally, my properties are below, and if you'd like to use them replace the current properties with these:
+
+    titleBarOverlay: {
+        color: '#37383f',
+        symbolColor: '#3b82f6',
+        height: 30
+    },
+
+There is also no transparent window when using Windows. So I added this backgroundColor setting to at least give a similar color to the basic transparent background on MacOS.
+
+    backgroundColor: '#37383f',
+
+This should give you a similar look and feel to what the app will look like on MacOS.
