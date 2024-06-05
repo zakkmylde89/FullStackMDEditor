@@ -55,7 +55,7 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
 
 1. Open '.vscode' folder and open 'settings.json' folder
 2. Remove current settings and insert:
-
+    <code>
     {<br>
     "editor.codeActionsOnSave": {<br>
         "source.fixAll.eslint": "always",<br>
@@ -68,7 +68,7 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
         "MD041": false
         }<br>
     }
-
+    </code>
 ## ESLint Config
 
 1. Open 'eslintrc.cjs' file and add:
