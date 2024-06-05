@@ -13,17 +13,17 @@ Tutorial From:
 ## Frameworks, Libraries, Tools
 
 Made With: 
--ElectronJs
+-[ElectronJs]
     (https://www.electronjs.org/docs/latest)
--ReactJs
+-[ReactJs]
     (https://react.dev/reference/react)
--Typescript
+-[Typescript]
     (https://www.typescriptlang.org/docs/)
--TailwindCSS
+-[TailwindCSS]
     (https://tailwindcss.com/docs/installation)
--Jotai
+-[Jotai]
     (https://jotai.org/docs/introduction)
--MDX Editor
+-[MDX-Editor]
     (https://mdxeditor.dev/editor/docs/getting-started)
 
 Yarn Package Manager
@@ -56,17 +56,17 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
 1. Open '.vscode' folder and open 'settings.json' folder
 2. Remove current settings and insert:
 
-    {
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "always",
-        "source.orgainzeImports": "always"
-        },
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on",
-    "markdownlint.config": {
+    {<br>
+    "editor.codeActionsOnSave": {<br>
+        "source.fixAll.eslint": "always",<br>
+        "source.orgainzeImports": "always"<br>
+        },<br>
+    "editor.formatOnSave": true,<br>
+    "editor.defaultFormatter": "esbenp.prettier-vscode",<br>
+    "editor.wordWrap": "on",<br>
+    "markdownlint.config": {<br>
         "MD041": false
-        }
+        }<br>
     }
 
 ## ESLint Config
