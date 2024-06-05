@@ -80,4 +80,68 @@ Prettier is a VSCode extension that auto formats our files and makes easier to r
 
 ## Main Process Config
 
-1. Open 'src/main/index.ts' file
+For the most part, the ElectronJS Config is go to go out of the box. We will go over the basic parts of the 'index.ts' file here and talk about what they do.
+
+    Lines 8-18 contain the function that defines our window for our app. It defines the size, hides the menu bar, gives us an icon for Linux, and sets our web preferences.
+
+    Lines 20-22 ake sure we only show the main window when we're ready for it to be shown.
+
+    Lines 24-27 are where we can set whether or not our application can open new windows, and in our case here the default setting of 'deny' out of the box is fine.
+
+    Lines 31-36 load our 'index.html' file when everything is ready.
+
+    Lines 41-50 say that when the app is ready we can create the user model ID.
+
+    Lines 52-59 actually create the window for our app using the preferences set in lines 8-18.
+
+    Lines 64-68 contain the code that will shut down our app once the window is closed. This is here because it common on macOS that closing the app window does not actually terminate the app from running in the background. With these lines that will not happen.
+
+For our app we will make a couple of changes to our settings from this file. Go to line 16 and update the 'sandbox' preference from 'false' to 'true'. The below that, add the 'contextIsolation' setting and set it to 'true'. These two properties are super important because they will enhance the security of our application. The context isolation property will separate the JavaScript context of the renderer from the main process. Updating the sandbox property to true will also make our renderer more secure.
+
+## Preload Script Config
+
+Open our 'src/preload/index.tx' file and we will remove everything below our imports and create a custom script. We will replace it with:
+
+    if (!process.contextIsolated) {
+        throw new Error('contextIsolation must be endabled in the BrowserWindow')
+    }
+
+    try {
+        contextBridge.exposeInMainWorld('context', {
+        //TODO
+    })
+    } catch (error) {
+        console.error(error)
+    }
+
+Next, we will go to our 'src/preload/index.d.ts' file, which defines some Global type configuration so that our app will support TypeScript and allow us to call any of our functions available in our 'src/preload/index.ts' file. For now we will change these properties:
+
+    Go to line 3 and comment the 'electron: ElectronAPI' property.
+
+    On line 4 replace the 'api: unknown' property with 'context: {}' and leave the object empty. Later we will add some properties and function. Once again they will be for configuring TypeScript with our project. If you remember from how we updated our 'index.ts' file we exposed it to this 'context' field.
+
+## Renderer Config
+
+Open the 'src/renderer/index.html' file. This is the entry point for our renderer process. We will start by removing the title and comment on lines 5 and 6. Then we will replace the <meta> element on lines 5-8 with our own custom settings which are:
+
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';"
+    />
+
+This will update our custom content security policies so that it will work with some of the libraries we will be using.
+
+Now we can begin to remove some of the unnecessary files that come with our frameworks and libraries. These will be:
+
+    'src/renderer/src/assets/electron.svg'
+    'src/renderer/src/assets/wavy-lines.svg'
+
+Then we can full clear out our 'src/renderer/src/main.css' file because we will be using TailwindCSS. Then we can remove:
+
+    'src/renderer/src/components/Versions.tsx' file
+
+This will fix the error message in the app window you received when removing the other two files.
+
+Now we can go into our 'src/renderer/src/App.tsx' file and remove the imports and everything inside of the fragment brackets. This will give a blank screen to work with for our app. Also remove the 'JSX.Element from line 1 leaving an empty space between the parenthesis and curly brackets.
+
+Now, we are finally ready to start working on the application itself. Now would be a great time to make a git commit.
