@@ -365,4 +365,8 @@ Once we've completed these files it is time to import them into our 'App.tsx' fi
 
 We will start this by adding some mock data to our sidebar to set it up, but it will eventually be filled with our actual file system for the app. To implement this we have to first go to our 'src/shared' folder and create a new file called 'models.ts' which will contain the models of our application. Here we will define our types for the content of our sidebar.
 
-Now inside of our 'src/renderer/src/store' folder we will create a new folder called 'mocks' in which we will create an 'index.ts' file. This is where we will store our mock data for creating our sidebar. I suggest pausing the video at 57:49 to see the mock data the source video supplies and just recreating it.
+Now inside of our 'src/renderer/src/store' folder we will create a new folder called 'mocks' in which we will create an 'index.ts' file. This is where we will store our mock data for creating our sidebar. I suggest pausing the video at 57:49 to see the mock data the source video supplies and just recreating it. If it has been awhile since you've done a git commit now would be a great time.
+
+Let's go back to our 'src/renderer/src/components' folder and create a file called 'NotePreviewList.tsx' that will contain an unordered list of our notes.
+
+Next we will extract a component to render a proper design for each note in our Sidebar. To do this we will go into our 'src/renderer/src/components' folder and create a new file called 'NotePreview.tsx'
